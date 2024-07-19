@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <h1>Welcome to <%= title %></h1>
+        <!-- Logout -->
+        <a href="/"><button>Logout</button> </a>
+        <hr />
+        <!-- Nova nota form -->
+        <form
+            action='<%= "/u/"+userID+"/novo" %>''
+            method="POST"
+        >
+            <label for="titulo">Título</label>
+            <input
+                type="text"
+                name="titulo"
+                id="titulo"
+                placeholder="Digite o título da anotação"
+                autofocus
+            />
+            <br />
+
+            <label for="mensagem">Mensagem</label>
+            <input
+                type="text"
+                name="mensagem"
+                id="mensagem"
+                placeholder="Digite a mensagem da anotação"
+            />
+            <input type="submit" value="Salvar" />
+        </form>
+        <a href='<%= "/u/"+userID %>'><button>Cancelar</button></a>
+        <script src="/javascripts/mostrarSenha.js"></script>
+    </body>
+</html>

@@ -1,8 +1,22 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.banner {
+    width: 100%;
+}
+
+.banner img {
+    width: 100%;
+    margin: auto;
+    content: url("../images/splash-wide2.jpg");
+}
+
+.banner h1 {
+    font: 32px "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: center;
 }
 
 a {
-  color: #00B7FF;
+    color: #00b7ff;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <div class="banner">
+            <img
+                src="../images/splash.jpg"
+                alt="Mosca desenhando o nome FlyApp com a trajetória do seu vôo"
+            />
+            <h1>Welcome to <%= title %></h1>
+        </div>
+        <!-- Logout -->
+        <a href="/"><button>Logout</button> </a>
+        <hr />
+        <!-- Anotações -->
+         <% if (notas && notas.length > 0) {%>
+            <h3>Você tem <%= notas.length %> anotações</h2>
+            <ul>
+                <% for (nota of notas) {%>
+                    <li><b><%= nota.titulo %></b>:<%= nota.mensagem %>
+                    <a href="/u/<%= userID %>/<%= nota.id %>/edit"><button>Editar</button></a>
+                    <a href="/u/<%= userID %>/<%= nota.id %>/excluir"><button>Apagar</button></a>
+                    </li>
+                <% } %>
+            </ul>
+        <% } else { %>
+            <h2>Você não tem anotações</h2>
+        <% } %>
+        <hr />
+        <!-- Nova anotação -->
+        <a href=<%= "/u/"+userID+"/novo" %>><button>Nova anotação</button> </a>
+        <hr />
+    </body>
+</html>

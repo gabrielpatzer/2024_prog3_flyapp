@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <h1>Welcome to <%= title %></h1>
+        <!-- Logout -->
+        <a href="/"><button>Logout</button> </a>
+        <hr />
+        <!-- Editar nota form -->
+        <h2>Apagar anotação</h2>
+        <form action="/u/<%= userID %>/<%= nota.id %>/excluir" method="POST">
+            <p>Título: <%= nota.titulo %></p>
+            <p>Mensagem: <%= nota.mensagem %></p>
+            <input type="submit" value="Excluir" />
+        </form>
+        <a href='<%= "/u/"+userID+"/"+nota.id %>'><button>Cancelar</button></a>
+    </body>
+</html>
