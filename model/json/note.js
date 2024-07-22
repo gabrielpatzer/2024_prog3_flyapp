@@ -13,7 +13,8 @@ class Note {
         const file = fs.readFileSync("./model/jsonDB/notes.json");
         const notas = JSON.parse(file);
         const data = notas.find((nota) => id.localeCompare(nota.id) == 0);
-        if (data) return data;
+        if (data)
+            return new Note(data.titulo, data.mensagem, data.userID, data.id);
         else return false;
     }
     static buscaNotasUsuario(id) {

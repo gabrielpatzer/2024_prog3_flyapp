@@ -1,7 +1,6 @@
-const fs = require("fs");
-const crypto = require("crypto");
 const express = require("express");
 const router = express.Router();
+const Users = require("../model/json/user");
 
 /* GET home page (login form). */
 router.get("/", function (req, res, next) {
@@ -15,7 +14,7 @@ router.get("/cadastro", function (req, res, next) {
 router.post("/", function (req, res, next) {
     const { login, senha } = req.body;
     // Verifica se usuário já existe no banco
-    const usuarioExiste = buscaUsuario(login);
+    const usuarioExiste = Users.buscaUsuario(login);
     // Se o usuário existe, verifica se a senha está correta e redireciona para dashboard
     if (usuarioExiste) {
         if (usuarioExiste.senha.localeCompare(senha) == 0) {
@@ -29,10 +28,11 @@ router.post("/", function (req, res, next) {
 router.post("/cadastro", function (req, res, next) {
     const { login, senha, email } = req.body;
     // Verifica se usuário já existe no banco
-    const usuarioExiste = buscaUsuario(login);
+    const usuarioExiste = Users.buscaUsuario(login);
     // Se não existir, insere no banco, mostra mensagem de sucesso e retorna ao login
     if (!usuarioExiste) {
-        insereNovoUsuario(crypto.randomUUID(), login, senha, email);
+        const novo = new Users(login, senha, email);
+        novo.salvar();
         res.render("cadastroSucesso", { title: "FlyApp", usuario: login });
     }
     // Se existir, mostra mensagem de erro e retorna ao cadastro
@@ -42,18 +42,3 @@ router.post("/cadastro", function (req, res, next) {
 });
 
 module.exports = router;
-
-function buscaUsuario(nome) {
-    const file = fs.readFileSync("./usersDB.json");
-    const usuarios = JSON.parse(file);
-    const data = usuarios.find((user) => nome.localeCompare(user.login) == 0);
-    if (data) return data;
-    else return false;
-}
-
-function insereNovoUsuario(id, login, senha, email = "") {
-    const file = fs.readFileSync("./usersDB.json");
-    const usuarios = JSON.parse(file);
-    usuarios.push({ id: id, login: login, senha: senha, email: email });
-    fs.writeFileSync("./usersDB.json", JSON.stringify(usuarios));
-}
